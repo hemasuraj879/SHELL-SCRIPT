@@ -4,7 +4,7 @@
 sudo dnf update -y
 
 # Remove any older versions of Docker if they exist
-sudo dnf remove docker \
+sudo dnf remove -y docker \
                 docker-client \
                 docker-client-latest \
                 docker-common \
@@ -27,5 +27,12 @@ sudo systemctl start docker
 
 # Enable Docker to start on boot
 sudo systemctl enable docker
+
+# Add current user to the docker group
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+# Inform the user to log out and log back in
+echo "You need to log out and log back in for the group changes to take effect."
 
 
